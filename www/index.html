@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Legal Contracts on Ethereum</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/gh/ethereum/web3.js/dist/web3.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <link rel="shortcut icon" type="image/x-icon" href="lethcontracts.ico" />
+    <script src="../dist/main.js"></script>
+    <link rel="stylesheet" type="text/css" href="../dist/extrastyle.css">
+</head>
+
+<body>
+
+    <div class="jumbotron text-center">
+        <h2 id="title">Legal Contracts on Ethereum</h2>
+        <p>Legal contracts signed digitally and added to the Ethereum blockchain with no 3rd party</p>
+        <p>This application uses Metamask</p>
+        <div id="update_notifications">
+            <p></p>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-3">
+                <h3>Deploy New Contract</h3>
+                <p></p>
+                <form action="/action_page.php">
+                    <div class="form-group">
+                        <label for="initialize_contract_name">Contract Name</label>
+                        <input type="text" class="form-control" id="initialize_contract_name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="initialize_party1_address">Our Address</label>
+                        <input type="text" class="form-control" id="initialize_party1_address" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="initialize_party2_address">Their Address</label>
+                        <input type="text" class="form-control" id="initialize_party2_address" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="private_switch">World Readable(Not Private)</label>
+                        <input type="checkbox" class="form-control" id="private_switch">
+                        </label>
+                    </div>
+                    <div class="custom-file">
+                        <label for="initialize_document">Upload Document</label>
+                        <input type="file" class="file-input" id="initialize_document" required>
+                    </div>
+                </form>
+                <div class="p-5">
+                    <button type="button" class="btn btn-primary" id="Deploy_button" onclick="Dapp.DeployMainContract()">Deploy Contract</button>
+                </div>
+                <div id="mainContractDeploymentText"></div>
+            </div>
+            <div class="col">
+                <p></p>
+                <label for="contract_address">Contract Address</label>
+                <input type="text" class="form-control" id="contract_address" required>
+                <p></p>
+                <ul class="nav nav-pills">
+                    <li class="nav-item">
+                        <a class="nav-link active" data-toggle="pill" href="#view" onclick="Dapp.ClickViewTab()">Contract Details</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="pill" href="#update" onclick="Dapp.ClickUpdateTab()">Update Contract</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="pill" href="#upload" onclick="Dapp.ClickUploadTab()">Upload Document</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="pill" href="#about" onclick="Dapp.CleanViews()">About</a>
+                    </li>
+                </ul>
+                <p></p>
+                <h4 class="text-center viewcleanup" id="contract_name"></h4>
+
+                <!-- Tab panes -->
+                <div class="tab-content p-5">
+                    <div class="tab-pane container active" id="view">
+                        <div class="view_response_messages"></div>
+                        <div id="view_contract_notifications"></div>
+                        <h5>Contract Details</h5>
+                        <div id="main_contract_details" class="viewcleanup"></div>
+                        <p></p>
+                        <h5 id="Parties_h5">Parties</h5>
+                        <h6 class="parties_h6">Us</h6>
+                        <div class="col viewcleanup" id="party1_view_address"></div>
+                        <div class="col viewcleanup" id="party1_view_column"></div>
+                        <h6 class="parties_h6">Them</h6>
+                        <div class="col viewcleanup" id="party2_view_address"></div>
+                        <div class="col viewcleanup" id="party2_view_column"></div>
+                        <p></p>
+                        <h5 id="document_details_h5">Document Details</h5>
+                        <div id="document_view_details" class="viewcleanup"></div>
+                        <p></p>
+                        <p></p>
+                        <button data-toggle="collapse" data-target="#previous_contracts_collapse" class="btn btn-primary">Previous Uploaded Documents</button>
+                        <div id="previous_contracts_collapse" class="collapse">
+                            <div id="previous_contracts" class="viewcleanup"></div>
+                        </div>
+                    </div>
+                    <div class="tab-pane container fade" id="update">
+                        <p></p>
+                        <div class="form-group"></div>
+                        <p></p>
+                        <h6 class="parties_h6">Update Your Information</h6>
+                        <div class="view_response_messages"></div>
+                        <form action="/action_page.php">
+                            <div class="form-group">
+                                <label for="name_update">Name:</label>
+                                <input type="text" class="form-control" id="name_update" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email_update">Email:</label>
+                                <input type="text" class="form-control" id="email_update" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="address_update">Address:</label>
+                                <input type="text" class="form-control" id="address_update" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="status_update">Status(cannot be changed after contract has been signed):</label>
+                                <select class="form-control" id="status_update">
+                                    <option label="Signed" >0</option>
+                                    <option label="Reviewing" >1</option>
+                                    <option label="Negotiating" >2</option>
+                                    <option label="Rejected" >3</option>
+                                  </select>
+                            </div>
+                        </form>
+                        <input id="update_on_click" type="button" class="btn btn-primary" value="Update" onclick="Dapp.UpdatePartyDetails();" />
+                    </div>
+
+                    <div class="tab-pane container fade" id="upload">
+                        <div id="document_upload_status" class="viewcleanup"></div>
+                        <p></p>
+                        <p></p>
+                        <h6 class="parties_h6">Contract Statuses</h6>
+                        <div id="document_upload_status_p1" class="viewcleanup"></div>
+                        <div id="document_upload_status_p2" class="viewcleanup"></div>
+                        <label for="updated_document_upload">Upload Document</label>
+                        <input type="file" class="file-input" id="updated_document_upload" required>
+                        <input type="text" class="form-control" id="file_comment" placeholder="Comments about this Document go here.">
+                        <p></p>
+                        <input id="upload_on_click" type="button" class="btn btn-primary" value="Upload" onclick="Dapp.UploadContractFile();" />
+                        <div id="upload_notifications"></div>
+                    </div>
+                    <div class="tab-pane container fade" id="about">
+                        <p>This is a simple application where two people can deploy and sign a legal contract on the Ethereum network without the need for a 3rd party. Once the contract has been signed by both parties, it cannot be altered and will forever exist on the Ethereum blockchain. A contract can only be updated by the two parties(addresses) included in the contract. A contract can be modified until only until both sides are in signed status. Once a contract has been signed by both parties, it cannot be modified. The contract document file is stored in IPFS(Infura).</p>
+                        <p></p>
+                        <p>To find out more about this application or to contribute to this project, please visit the repository here:</p> <a href="https://gitlab.com/mfocella/legal-contracts-on-ethereum">Legal Contracts on Ethereum</a>
+                        <p>Questions, Concerns, Impressions, Comments and Suggestions are all welcomed: m.focella@gmail.com</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>
