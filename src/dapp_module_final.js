@@ -10,8 +10,6 @@ var compiledcontract;
 
 
 
-
-
 /////////Solidity Code//////////
 
 
