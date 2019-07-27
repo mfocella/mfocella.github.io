@@ -90,7 +90,7 @@ window.Dapp = {
         var files = document.getElementById("initialize_document").files;
         var filename = document.getElementById("initialize_document").files[0].name;
         var filehash = await Dapp.AddFileIPFS(files[0]);
-        var TwoPartyLegalContract = web3.eth.contract(abiinterface);
+        var TwoPartyLegalContract = new web3.eth.Contract(abiinterface);
         console.log("IPFS filehash is " + filehash);
         TwoPartyLegalContract.new( address1, address2, name, filehash, filename, private_setting,
             { data: bytecode, from: web3.eth.accounts[0] }, function(e, contract){
@@ -195,7 +195,7 @@ window.Dapp = {
     },
 
     CreateContractInstance: function() {
-        var LegalContract = web3.eth.contract(abiinterface);
+        var LegalContract = new web3.eth.Contract(abiinterface);
         var mainContractAddress = document.getElementById("contract_address").value;
         var myLegalContract = LegalContract.at(mainContractAddress);
         return myLegalContract;
