@@ -2,7 +2,7 @@ version: 0.2
 phases:
   install:
     runtime-versions:
-      nodejs: 10
+      nodejs: 12
     commands:
       - echo "Install dependancies for Tests and Deploy release candidate to SH"
       - echo `pwd`
@@ -18,8 +18,7 @@ phases:
     commands:
       - echo "Run FrontEnd Nightwatch tests"
       #- nightwatch tests/q_compliance_tests.js when running q-compliance tests
-      - /usr/local/lib/node_modules/nightwatch tests/q_audit_tests.js
-      #- nightwatch tests/q_audit_tests.js
+      - nightwatch tests/q_audit_tests.js
   post_build:
     commands:
       - echo "post_build_step"
