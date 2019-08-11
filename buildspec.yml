@@ -7,9 +7,8 @@ phases:
       - echo "Install dependancies for Tests and Deploy release candidate to SH"
       - echo `pwd`
       - echo `ls`
-      - sudo -i
-      - npm install -g nightwatch
-      - npm install -g chromedriver
+      - sudo npm install -g nightwatch
+      - sudo npm install -g chromedriver
       # Run the Nightwatch deploy to SH and test it was successful script
       #-nightwatch deploys/q_compliance_deploy_n_test.js
   pre_build:
