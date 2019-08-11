@@ -9,7 +9,7 @@ phases:
       - echo `ls`
       - npm install -g nightwatch
       - npm install -g electron --unsafe-perm=true
-      - npm install -g chromedriver
+      - npm install -g chromedriver --unsafe-perm=true
       # Run the Nightwatch deploy to SH and test it was successful script
       #-nightwatch deploys/q_compliance_deploy_n_test.js
   pre_build:
