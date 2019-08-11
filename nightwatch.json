@@ -7,16 +7,6 @@
     "cli_args": [ "--verbose"],
     "port": 9515
   },
-  
-  "chrome": {
-  desiredCapabilities: {
-    browserName: 'chrome',
-    javascriptEnabled: true,
-    chromeOptions: {
-      args: [ 'headless' ]
-    }
-  }
-  },
 
   "test_settings" : {
     "default" : {
