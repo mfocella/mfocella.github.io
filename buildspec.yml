@@ -18,7 +18,8 @@ phases:
     commands:
       - echo "Run FrontEnd Nightwatch tests"
       #- nightwatch tests/q_compliance_tests.js when running q-compliance tests
-      - nightwatch tests/q_audit_tests.js
+      - /usr/local/lib/node_modules/nightwatch tests/q_audit_tests.js
+      #- nightwatch tests/q_audit_tests.js
   post_build:
     commands:
       - echo "post_build_step"
