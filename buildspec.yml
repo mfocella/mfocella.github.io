@@ -1,6 +1,8 @@
 version: 0.2
 phases:
   install:
+  runtime-versions:
+      nodejs: 10
     commands:
       - echo "Install dependancies for Tests and Deploy release candidate to SH"
       - echo `pwd`
