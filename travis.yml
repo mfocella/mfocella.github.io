@@ -2,6 +2,9 @@ branches:
   only:
   - test_travisci 
   - releasecandidate
+  
+
+language: node_js
 
 dist: xenial
 services:
