@@ -1,0 +1,45 @@
+branches:
+  only:
+  - test_travisci 
+  - releasecandidate
+
+dist: xenial
+services:
+  - xvfb
+addons:
+  chrome: stable
+
+stages:
+  - run nightwatch tests
+
+before_install:
+  - npm i -g npm
+  - npm install -g nightwatch
+  - npm install -g chromedriver 
+  - echo "chromedriver is here"
+  - which chromedriver
+
+
+install:
+  - echo "nothing to install"
+  # install a sh on this vm which would connect to our indexer and install Q-Audit to run tests against this server???
+
+jobs:
+  include:
+    - stage: run nightwatch tests
+      name: Run nightwatch tests on Q-Audit
+      script:
+        #in the nightwatch config give the following flags for headless mode --headless --disable-gpu 
+        - nightwatch tests/q_audit_tests.js
+
+after_success:
+  - echo "merging pull request of release candidate into master"
+  - #merge the pull request of the release candidate into master
+
+notifications:
+  email:
+    recipients:
+      # the slack channel email
+      - mfocella@qmulos.com
+    on_success: always # default: change
+    on_failure: always # default: always
