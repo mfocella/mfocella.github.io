@@ -15,7 +15,7 @@ stages:
 
 before_install:
   - npm install nightwatch
-  - npm install chromedriver
+  - npm install -g chromedriver
   - echo "chromedriver is here"
   - which chromedriver
 
