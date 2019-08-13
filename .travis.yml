@@ -5,6 +5,7 @@ branches:
   - test_travisci 
 
 dist: xenial
+sudo: true
 services:
   - xvfb
 addons:
