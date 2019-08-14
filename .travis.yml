@@ -29,7 +29,7 @@ jobs:
       name: Run nightwatch tests on Q-Audit
       script:
         #in the nightwatch config give the following flags for headless mode --headless --disable-gpu 
-        - ./nightwatch tests/q_audit_tests.js
+        - nightwatch tests/q_audit_tests.js
 
 after_success:
   - echo "merging pull request of release candidate into master"
