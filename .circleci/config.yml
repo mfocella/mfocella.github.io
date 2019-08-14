@@ -10,7 +10,7 @@ jobs:
         - test_circle_ci
     docker:
       # specify the version you desire here
-      - image: karthikiyengar/node-nightwatch:0.0.2
+      - image: circleci/node:6.11.1-browsers
 
       # Specify service dependencies here if necessary
       # CircleCI maintains a library of pre-built images
