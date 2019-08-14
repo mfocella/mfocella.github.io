@@ -24,5 +24,6 @@ jobs:
 
       # Download and cache dependencies
 
-      - run: npm install nightwatch -g
+      - run: npm install nightwatch
+      - run: npm install selenium-standalone-jar chromedriver
       - run: nightwatch tests/q_audit_tests.js
