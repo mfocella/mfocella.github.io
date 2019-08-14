@@ -19,7 +19,7 @@ stages:
   - run nightwatch tests
 
 before_install:
-  - npm install -g nightwatch
+  - npm install nightwatch -g
 
 
 install:
