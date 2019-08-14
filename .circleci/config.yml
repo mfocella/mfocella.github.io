@@ -4,10 +4,10 @@
 #
 version: 2
 jobs:
-filters:
-  branches:
-    only: test_cicrle_ci
   build:
+    branches:
+      only:
+        - test_circle_ci
     docker:
       # specify the version you desire here
       - image: karthikiyengar/node-nightwatch:0.0.2
