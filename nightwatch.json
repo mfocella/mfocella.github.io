@@ -1,0 +1,19 @@
+{
+  "src_folders": ["./tests"],
+
+  "webdriver": {
+    "start_process": true,
+    "server_path": "/usr/local/bin/chromedriver",
+    "port": 9515
+  },
+
+  "test_settings" : {
+    "default" : {
+      "desiredCapabilities" : {
+        "browserName": "chrome"
+      },
+      "end_session_on_fail" : false,
+      "skip_testcases_on_fail" : false
+    }
+  }
+}
