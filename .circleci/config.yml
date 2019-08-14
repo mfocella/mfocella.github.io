@@ -4,6 +4,9 @@
 #
 version: 2
 jobs:
+filters:
+  branches:
+    only: test_cicrle_ci
   build:
     docker:
       # specify the version you desire here
