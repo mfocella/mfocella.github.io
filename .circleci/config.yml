@@ -1,9 +1,10 @@
+#
 version: 2
 jobs:
   build:
     branches:
-        only:
-          -test_circle_ci
+      only:
+        -test_circle_ci
     machine: true
     working_directory: /test_dir
     steps:
