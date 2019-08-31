@@ -1,29 +1,24 @@
-# Javascript Node CircleCI 2.0 configuration file
-#
-# Check https://circleci.com/docs/2.0/language-javascript/ for more details
-#
 version: 2
 jobs:
   build:
     branches:
-      only:
-        - test_circle_ci
-    docker:
-      # specify the version you desire here
-      - image: circleci/node:6.11.1-browsers
-
-      # Specify service dependencies here if necessary
-      # CircleCI maintains a library of pre-built images
-      # documented at https://circleci.com/docs/2.0/circleci-images/
-      # - image: circleci/mongo:3.4.4
-
-    working_directory: ~/repo
-
+        only:
+          -test_circle_ci
+    machine: true
+    working_directory: /test_dir
     steps:
+      # Docker is preinstalled, along with docker-compose
       - checkout
 
-      # Download and cache dependencies
+      # start proprietary DB using private Docker image
+      - run: |
+          docker login -u $q_USER -p $q_PASS
+          docker run -d -p 8000:8000 -e 'SPLUNK_START_ARGS=--accept-license' -e 'SPLUNK_PASSWORD=qmulosqmulos' mfocella/q_splunk_n_night:q_auditv3
+      # Download and configure Qmulos apps
+      - run: 
+        name: "Download newest version of Qmulos apps and configure"
+        command: "./configure_qaudit.sh"
 
-      - run: npm install nightwatch
-      - run: npm install selenium-standalone-jar chromedriver
-      - run: nightwatch tests/q_audit_tests.js
+      - run:
+        name: "Run Nightwatch Front End tests"
+        command: "nightwatch /home/splunk/nightwatch_q_app_frontend_testing/q_audit_tests.js"
